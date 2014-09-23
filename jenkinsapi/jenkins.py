@@ -359,3 +359,14 @@ class Jenkins(JenkinsBase):
         response = self.requester.get_and_confirm_status(self.baseurl)
         version_key = 'X-Jenkins'
         return response.headers.get(version_key, '0.0')
+
+    def get_running_jobs(self):
+        """
+        Return  current running jobs
+        """
+        running_jobs = []
+        for job in self._data['jobs']:
+            if job['color'].endswith('_anime'):
+                running_jobs.append(job['name'])
+
+        return running_jobs
